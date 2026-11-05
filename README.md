@@ -1,82 +1,71 @@
-# sqlmap
+# SQL Eagle
 
-[![.github/workflows/tests.yml](https://github.com/sqlmapproject/sqlmap/actions/workflows/tests.yml/badge.svg)](https://github.com/sqlmapproject/sqlmap/actions/workflows/tests.yml) [![Python 2.7|3.x](https://img.shields.io/badge/python-2.7|3.x-yellow.svg)](https://www.python.org/) [![License](https://img.shields.io/badge/license-GPLv2-red.svg)](https://raw.githubusercontent.com/sqlmapproject/sqlmap/master/LICENSE) [![x](https://img.shields.io/badge/x-@sqlmap-blue.svg)](https://x.com/sqlmap)
+SQL Eagle is a command-line toolkit for authorized web-application and database security assessments. It helps security professionals identify and validate SQL injection risks, fingerprint database backends, and document findings in controlled testing environments.
 
-sqlmap is an open source penetration testing tool that automates the process of detecting and exploiting SQL injection flaws and taking over of database servers. It comes with a powerful detection engine, many niche features for the ultimate penetration tester, and a broad range of switches including database fingerprinting, over data fetching from the database, accessing the underlying file system, and executing commands on the operating system via out-of-band connections.
+> **Authorization required:** Use SQL Eagle only against applications, systems, and databases that you own or have explicit permission to assess. Testing third-party targets without authorization may be illegal.
 
-Screenshots
-----
+## What it does
 
-![Screenshot](https://raw.github.com/wiki/sqlmapproject/sqlmap/images/sqlmap_screenshot.png)
+SQL Eagle provides automated support for:
 
-You can visit the [collection of screenshots](https://github.com/sqlmapproject/sqlmap/wiki/Screenshots) demonstrating some of the features on the wiki.
+- Detecting potential SQL injection points in HTTP requests.
+- Testing boolean-based, error-based, time-based, UNION-based, stacked-query, and out-of-band techniques.
+- Identifying supported database management systems.
+- Enumerating databases, tables, columns, users, and schemas during an authorized assessment.
+- Exporting assessment results and retaining session data for later review.
+- Working with URL parameters, POST data, cookies, proxies, HTTP/2, and WebSockets.
+- Extending request handling through optional tamper scripts and database-specific plugins.
 
-Installation
-----
+## Requirements
 
-You can download the latest tarball by clicking [here](https://github.com/sqlmapproject/sqlmap/tarball/master) or latest zipball by clicking [here](https://github.com/sqlmapproject/sqlmap/zipball/master).
+- Python 3.x is recommended.
+- A permitted test target or a local security-testing lab.
 
-Preferably, you can download sqlmap by cloning the [Git](https://github.com/sqlmapproject/sqlmap) repository:
+The project includes its runtime dependencies and does not require a separate package installation for normal use.
 
-    git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git sqlmap-dev
+## Getting started
 
-sqlmap works out of the box with [Python](https://www.python.org/download/) version **2.7** and **3.x** on any platform.
+Clone this repository and view the available options:
 
-Usage
-----
+```bash
+git clone https://github.com/lordeagle-tech/sqleagle.git
+cd sqleagle
+python3 sqlmap.py -h
+```
 
-To get a list of basic options and switches use:
+For the complete option reference:
 
-    python sqlmap.py -h
+```bash
+python3 sqlmap.py -hh
+```
 
-To get a list of all options and switches use:
+A typical assessment command must target an authorized URL. For example, in a local lab:
 
-    python sqlmap.py -hh
+```bash
+python3 sqlmap.py -u "http://127.0.0.1:8000/item?id=1" --batch
+```
 
-You can find a sample run [here](https://asciinema.org/a/46601).
-To get an overview of sqlmap capabilities, a list of supported features, and a description of all options and switches, along with examples, you are advised to consult the [user's manual](https://github.com/sqlmapproject/sqlmap/wiki/Usage).
+Do not copy this command to a system you do not control or have permission to test.
 
-Links
-----
+## Project layout
 
-* Homepage: https://sqlmap.org
-* Download: [.tar.gz](https://github.com/sqlmapproject/sqlmap/tarball/master) or [.zip](https://github.com/sqlmapproject/sqlmap/zipball/master)
-* Commits RSS feed: https://github.com/sqlmapproject/sqlmap/commits/master.atom
-* Issue tracker: https://github.com/sqlmapproject/sqlmap/issues
-* User's manual: https://github.com/sqlmapproject/sqlmap/wiki
-* Frequently Asked Questions (FAQ): https://github.com/sqlmapproject/sqlmap/wiki/FAQ
-* X: [@sqlmap](https://x.com/sqlmap)
-* Demos: [https://www.youtube.com/user/inquisb/videos](https://www.youtube.com/user/inquisb/videos)
-* Playground: https://sekumart.sekuripy.hr
-* Research: https://www.sekuripy.hr/labs/sqlmap/#research
-* Screenshots: https://github.com/sqlmapproject/sqlmap/wiki/Screenshots
+- `sqlmap.py` — command-line entry point.
+- `sqlmapapi.py` — optional REST API entry point.
+- `lib/` — scanning engine, request handling, detection techniques, and output logic.
+- `plugins/` — generic and database-specific functionality.
+- `data/` — payload definitions, query templates, and supporting data.
+- `tamper/` — optional payload transformation modules.
+- `tests/` — automated tests.
+- `doc/ARCHITECTURE.md` — implementation architecture and contributor guidance.
 
-Translations
-----
+## Upstream attribution
 
-* [Arabic](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ar-AR.md)
-* [Bengali](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-bn-BD.md)
-* [Bulgarian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-bg-BG.md)
-* [Chinese](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-zh-CN.md)
-* [Croatian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-hr-HR.md)
-* [Dutch](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-nl-NL.md)
-* [French](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-fr-FR.md)
-* [Georgian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ka-GE.md)
-* [German](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-de-DE.md)
-* [Greek](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-gr-GR.md)
-* [Hindi](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-in-HI.md)
-* [Indonesian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-id-ID.md)
-* [Italian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-it-IT.md)
-* [Japanese](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ja-JP.md)
-* [Korean](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ko-KR.md)
-* [Kurdish (Central)](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ckb-KU.md)
-* [Persian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-fa-IR.md)
-* [Polish](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-pl-PL.md)
-* [Portuguese](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-pt-BR.md)
-* [Russian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-ru-RU.md)
-* [Serbian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-rs-RS.md)
-* [Slovak](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-sk-SK.md)
-* [Spanish](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-es-MX.md)
-* [Turkish](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-tr-TR.md)
-* [Ukrainian](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-uk-UA.md)
-* [Vietnamese](https://github.com/sqlmapproject/sqlmap/blob/master/doc/translations/README-vi-VN.md)
+SQL Eagle is a rebranded distribution based on the open-source [sqlmap](https://github.com/sqlmapproject/sqlmap) project. The upstream project and its contributors retain credit for the original code and technical work. This repository keeps the applicable license and attribution files.
+
+## License
+
+This project is distributed under the GNU General Public License, version 2. See [`LICENSE`](LICENSE) and [`COPYING`](COPYING) for the applicable terms.
+
+## Disclaimer
+
+The maintainers provide this software for legitimate security testing and research. Users are responsible for obtaining authorization, complying with applicable laws, and protecting any data encountered during an assessment.
